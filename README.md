@@ -2,16 +2,16 @@
 
 ## **users テーブル**
 
-| Column                | Type     | Options     |
-| --------------------- | -------- | ----------- |
-| nickname              | string   | null: false |
-| email                 | string   | null: false |
-| encrypted_password    | string   | null: false |
-| sei                   | string   | null: false |
-| mei                   | string   | null: false |
-| kana_sei              | string   | null: false |
-| kana_mei              | string   | null: false |
-| birthday              | date     | null: false |
+| Column                | Type     | Options                   |
+| --------------------- | -------- | ------------------------- |
+| nickname              | string   | null: false               |
+| email                 | string   | null: false, unique: true |
+| encrypted_password    | string   | null: false               |
+| sei                   | string   | null: false               |
+| mei                   | string   | null: false               |
+| kana_sei              | string   | null: false               |
+| kana_mei              | string   | null: false               |
+| birthday              | date     | null: false               |
 
 # アソシエーション
 has_many :items
@@ -61,7 +61,7 @@ belongs_to :purchase_history
 | Column           | Type         | Options                        |
 | ---------------- | ------------ | ------------------------------ |
 | user             | references   | null: false, foreign_key: true |
-| items            | references   | null: false, foreign_key: true |
+| item             | references   | null: false, foreign_key: true |
 
 # アソシエーション
 belongs_to :user
