@@ -28,7 +28,7 @@ has_many :purchase_histories
 | description       | text        | null: false                    |
 | condition_id      | integer     | null: false                    |
 | delivery_cost_id  | integer     | null: false                    |
-| delivery_area_id  | integer     | null: false                    |
+| prefectures_id    | integer     | null: false                    |
 | delivery_day_id   | integer     | null: false                    |
 | items_category_id | integer     | null: false                    |
 | user              | references  | null: false, foreign_key: true |
@@ -52,7 +52,6 @@ has_one: purchase_history
 | purchase_history    | references   | null: false, foreign_key: true |
 
 # アソシエーション
-belongs_to :user
 belongs_to :purchase_history 
 
 
