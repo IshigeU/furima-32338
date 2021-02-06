@@ -15,7 +15,7 @@
 
 # アソシエーション
 has_many :items
-has_many :purchase_history
+has_many :purchase_histories
 
 
 
@@ -25,17 +25,16 @@ has_many :purchase_history
 | ----------------- | ----------- | ------------------------------ |
 | name              | string      | null: false                    |
 | price             | integer     | null: false                    |
-| description       | string      | null: false                    |
-| detail            | string      | null: false                    |
+| description       | text        | null: false                    |
 | condition_id      | integer     | null: false                    |
 | delivery_cost_id  | integer     | null: false                    |
 | delivery_area_id  | integer     | null: false                    |
 | delivery_day_id   | integer     | null: false                    |
 | items_category_id | integer     | null: false                    |
-| user_id           | references  | null: false, foreign_key: true |
+| user              | references  | null: false, foreign_key: true |
 
 # アソシエーション
-belongs_to :users
+belongs_to :user
 has_one: purchase_history
 
 
@@ -50,10 +49,10 @@ has_one: purchase_history
 | address             | string       | null: false                    |
 | building_name       | string       |                                |
 | phone_number        | string       | null: false                    |
-| purchase_history_id | integer      | null: false                    |
+| purchase_history    | references   | null: false, foreign_key: true |
 
 # アソシエーション
-belongs_to :users
+belongs_to :user
 belongs_to :purchase_history 
 
 
@@ -62,10 +61,10 @@ belongs_to :purchase_history
 
 | Column           | Type         | Options                        |
 | ---------------- | ------------ | ------------------------------ |
-| user_id          | references   | null: false, foreign_key: true |
-| items_id         | references   | null: false, foreign_key: true |
+| user             | references   | null: false, foreign_key: true |
+| items            | references   | null: false, foreign_key: true |
 
 # アソシエーション
-belongs_to :users
-belongs_to :items
+belongs_to :user
+belongs_to :item
 has_one :orderer_info
