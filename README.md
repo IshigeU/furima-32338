@@ -6,7 +6,6 @@
 | --------------------- | -------- | ----------- |
 | nickname              | string   | null: false |
 | email                 | string   | null: false |
-| password              | string   | null: false |
 | encrypted_password    | string   | null: false |
 | sei                   | string   | null: false |
 | mei                   | string   | null: false |
@@ -16,7 +15,7 @@
 
 # アソシエーション
 has_many :items
-
+has_many :purchase_history
 
 
 
@@ -24,47 +23,49 @@ has_many :items
 
 | Column            | Type        | Options                        |
 | ----------------- | ----------- | ------------------------------ |
-| items_image       | string      | null: false                    |
 | name              | string      | null: false                    |
 | price             | integer     | null: false                    |
-| discription       | string      | null: false                    |
-| detailes          | string      | null: false                    |
-| condition         | string      | null: false                    |
-| delivery_cost     | string      | null: false                    |
-| delivery_area     | string      | null: false                    |
-| delivery_day      | string      | null: false                    |
-| items_category    | string      | null: false                    |
-| user_id           | integer     | null: false, foreign_key: true |
+| description       | string      | null: false                    |
+| detail            | string      | null: false                    |
+| condition_id      | integer     | null: false                    |
+| delivery_cost_id  | integer     | null: false                    |
+| delivery_area_id  | integer     | null: false                    |
+| delivery_day_id   | integer     | null: false                    |
+| items_category_id | integer     | null: false                    |
+| user_id           | references  | null: false, foreign_key: true |
 
 # アソシエーション
-belongs_to :user
+belongs_to :users
+has_one: purchase_history
 
 
 
 ## **orderer_info テーブル**
 
-| Column           | Type         | Options                        |
-| ---------------- | ------------ | ------------------------------ |
-| post_code        | string       | null: false                    |
-| prefectures      | string       | null: false                    |
-| city             | string       | null: false                    |
-| adress           | string       | null: false                    |
-| building_name    | string       | null: false                    |
-| phone_number     | string       | null: false                    |
-| user_id          | integer      | null: false, foreign_key: true |
+| Column              | Type         | Options                        |
+| ------------------- | ------------ | ------------------------------ |
+| post_code           | string       | null: false                    |
+| prefectures_id      | integer      | null: false                    |
+| city                | string       | null: false                    |
+| address             | string       | null: false                    |
+| building_name       | string       |                                |
+| phone_number        | string       | null: false                    |
+| purchase_history_id | integer      | null: false                    |
 
 # アソシエーション
-belongs_to :user
+belongs_to :users
+belongs_to :purchase_history 
 
 
 
-## **credit_card テーブル**
+## **purchase_history テーブル**
 
 | Column           | Type         | Options                        |
 | ---------------- | ------------ | ------------------------------ |
-| user_id          | integer      | null: false, foreign_key: true |
-| card_id          | string       | null: false                    |
-| security_code    | string       | null: false                    |
+| user_id          | references   | null: false, foreign_key: true |
+| items_id         | references   | null: false, foreign_key: true |
 
 # アソシエーション
-belongs_to :user
+belongs_to :users
+belongs_to :items
+has_one :orderer_info
