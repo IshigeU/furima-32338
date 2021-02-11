@@ -10,10 +10,14 @@ class User < ApplicationRecord
     #passwordは英数字混合
     validates :password, format: { with: /\A(?=.*?[a-z])(?=.*?\d)[a-z\d]+\z/i }
     #sei,meiは漢字、ひらがな、カタカナのみ
-    validates :sei,format: {with: /\A[ぁ-んァ-ン一-龥]/ }
-    validates :mei,format: {with: /\A[ぁ-んァ-ン一-龥]/ }
+    with_options format: {with: /\A[ぁ-んァ-ン一-龥々]/} do
+    validates :sei
+    validates :mei
+    end
     #kana_sei,kana_meiはカタカナのみ
-    validates :kana_sei,format: {with: /\A[ァ-ヶー－]+\z/ }
-    validates :kana_mei,format: {with: /\A[ァ-ヶー－]+\z/ }
+    with_options format: {with: /\A[ァ-ヶー－]+\z/} do
+    validates :kana_sei
+    validates :kana_mei
+    end
   end
 end
