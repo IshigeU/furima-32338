@@ -27,9 +27,9 @@ has_many :purchase_histories
 | price             | integer     | null: false                    |
 | description       | text        | null: false                    |
 | condition_id      | integer     | null: false                    |
-| delivery_cost_id  | integer     | null: false                    |
+| delivary_cost_id  | integer     | null: false                    |
 | prefecture_id     | integer     | null: false                    |
-| delivery_day_id   | integer     | null: false                    |
+| delivary_day_id   | integer     | null: false                    |
 | items_category_id | integer     | null: false                    |
 | user              | references  | null: false, foreign_key: true |
 
