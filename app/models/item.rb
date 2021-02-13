@@ -1,9 +1,9 @@
 class Item < ApplicationRecord
   extend ActiveHash::Associations::ActiveRecordExtensions
 
-  belongs_to :item
   belongs_to :user
   has_one_attached :image
+
   belongs_to_active_hash :prefecture
   belongs_to_active_hash :condition
   belongs_to_active_hash :delivary_cost
@@ -19,7 +19,7 @@ class Item < ApplicationRecord
     validates :prefecture_id
     validates :delivary_day_id
     validates :items_category_id
-    validates :user
+    validates :image
   end
 
   #ジャンルの選択が「--」の時は保存できないようにする(activehash)
