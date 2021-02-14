@@ -15,11 +15,6 @@ class Item < ApplicationRecord
     validates :price, numericality: { only_integer: true, greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999}
     validates :price, format:{ with: /\A[0-9]+\z/ } 
     validates :description
-    validates :condition_id
-    validates :delivary_cost_id
-    validates :prefecture_id
-    validates :delivary_day_id
-    validates :items_category_id
     validates :image
   end
 
