@@ -1,8 +1,12 @@
 class PurchaseHistoriesController < ApplicationController
+  before_action :authenticate_user!
 
   def index
     @orderform = OrderForm.new
     @item = Item.find(params[:item_id])
+    if @item.purchase_history.present?
+      redirect_to root_path
+    end
   end
   
   def create
