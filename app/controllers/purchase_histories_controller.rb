@@ -1,9 +1,9 @@
 class PurchaseHistoriesController < ApplicationController
   before_action :authenticate_user!
+  before_action :find_item
 
   def index
     @orderform = OrderForm.new
-    @item = Item.find(params[:item_id])
     if @item.purchase_history.present?
       redirect_to root_path
     elsif current_user.id == @item.user_id
@@ -13,7 +13,6 @@ class PurchaseHistoriesController < ApplicationController
   
   def create
     @orderform = OrderForm.new(purchase_history_params)
-    @item = Item.find(params[:item_id])
     if @orderform.valid?
       pay_item
       @orderform.save
@@ -36,6 +35,10 @@ class PurchaseHistoriesController < ApplicationController
       card: params[:token],
       currency: 'jpy'
     )
+  end
+
+  def find_item
+    @item = Item.find(params[:item_id])
   end
 
 end

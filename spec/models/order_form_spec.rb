@@ -3,10 +3,17 @@ require 'rails_helper'
 RSpec.describe OrderForm, type: :model do
   describe '#create' do
     before do
-      @orderform = FactoryBot.build(:order_form)
+      @user = FactoryBot.create(:user)
+      @item = FactoryBot.create(:item)
+      @orderform = FactoryBot.build(:order_form, user_id: @user.id, item_id: @item.id)
+      sleep(1)
     end
     context '購入できる場合' do
       it '全部もれなく入力されていれば購入できる' do
+        expect(@orderform).to be_valid
+      end
+      it '建物名が空でも購入できる' do
+        @orderform.building_name = ''
         expect(@orderform).to be_valid
       end
     end
@@ -56,6 +63,16 @@ RSpec.describe OrderForm, type: :model do
         @orderform.phone_number = '090-1111-1111'
         @orderform.valid?
         expect(@orderform.errors.full_messages).to include("Phone number is invalid")
+      end
+      it 'user_idが空だと登録できない' do
+        @orderform.user_id = ''
+        @orderform.valid?
+        expect(@orderform.errors.full_messages).to include("User can't be blank")
+      end
+      it 'item_idが空だと登録できない' do
+        @orderform.item_id = ''
+        @orderform.valid?
+        expect(@orderform.errors.full_messages).to include("Item can't be blank")
       end
     end
   end

@@ -6,7 +6,5 @@ FactoryBot.define do
     post_code        {'123-1234'}
     prefecture_id    {2}
     phone_number     {'12312341234'}
-    user_id          {1}
-    item_id          {1}
   end
 end
